@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 15:21:11 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/17 12:25:38 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:50:47 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,29 @@ void Contact::setSecret(std::string str)
 
 std::string Contact::getFirstName(void)
 {
-	return (_firstName);
+	return _firstName;
 }
 
 
 std::string Contact::getLastName(void)
 {
-	return (_lastName);
+	return _lastName;
 }
 
 
 std::string Contact::getNickName(void)
 {
-	return (_nickName);
+	return _nickName;
 }
 
 
 std::string Contact::getPhoneNumber(void)
 {
-	return (_phoneNumber);
+	return _phoneNumber;
 }
 
 
 std::string Contact::getSecret(void)
 {
-	return (_secret);
+	return _secret;
 }
