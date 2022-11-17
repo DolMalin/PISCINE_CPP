@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 15:21:14 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/04/11 18:31:14 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:25:02 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,30 @@
 
 # include <iostream>
 
-# define FIELDS_LEN		5
-
-# define FIRST_NAME 	0
-# define LAST_NAME		1
-# define NICK_NAME		2
-# define PHONE_NUMBER	3
-# define DARKEST_SECRET	4
-
 class Contact {
 	
 	public:
 		Contact(void);
 		~Contact(void);
-		void		set(void);
-		std::string	get_info(int type);
+		
+		void		setFirstName(std::string str);
+		void		setLastName(std::string str);
+		void		setNickName(std::string str);
+		void		setPhoneNumber(std::string str);
+		void		setSecret(std::string str);
+
+		std::string	getFirstName(void);
+		std::string	getLastName(void);
+		std::string	getNickName(void);
+		std::string	getPhoneNumber(void);
+		std::string	getSecret(void);
 		
 	private:
-		std::string infos[FIELDS_LEN];
+		std::string _firstName;
+		std::string _lastName;
+		std::string _nickName;
+		std::string _phoneNumber;
+		std::string _secret;
 };
 
 #endif

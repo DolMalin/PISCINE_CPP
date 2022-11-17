@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 15:21:11 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/04/11 18:44:55 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:25:38 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,68 @@
 #include "Contact.hpp"
 
 Contact::Contact(void) {}
+
 Contact::~Contact(void) {}
 
-void	Contact::set(void)
+/* =================== SET INFOS =================== */
+
+void Contact::setFirstName(std::string str)
 {
-	std::string buffer;
-	
-	for (int i = 0; i < FIELDS_LEN; i++)
-	{
-		buffer = "";
-		while (buffer.empty())
-		{
-			switch (i)
-			{
-				case FIRST_NAME:
-					std::cout << "Enter a first name: ";
-					std::getline(std::cin, buffer);
-					break;
-				case LAST_NAME:
-					std::cout << "Enter a last name: ";
-					std::getline(std::cin, buffer);
-					break;
-				case NICK_NAME:
-					std::cout << "Enter a nick name: ";
-					std::getline(std::cin, buffer);
-					break;
-				case PHONE_NUMBER:
-					std::cout << "Enter a phoner number: ";
-					std::getline(std::cin, buffer);
-					break;
-				case DARKEST_SECRET:
-					std::cout << "Enter a darkest secret: ";
-					std::getline(std::cin, buffer);
-					break;
-			}
-		}
-		this->infos[i] = buffer;
-	}
-		std::cout << "New user add !" << std::endl;	
+	_firstName = str;
 }
 
-std::string	Contact::get_info(int type)
+
+void Contact::setLastName(std::string str)
 {
-	if (type < 0 || type >= FIELDS_LEN)
-		return ("");
-	return (this->infos[type]);
+	_lastName = str;
+}
+
+
+void Contact::setNickName(std::string str)
+{
+	_nickName = str;
+}
+
+
+void Contact::setPhoneNumber(std::string str)
+{
+	_phoneNumber = str;
+}
+
+
+void Contact::setSecret(std::string str)
+{
+	_secret = str;
+}
+
+
+/* =================== GET INFOS =================== */
+
+std::string Contact::getFirstName(void)
+{
+	return (_firstName);
+}
+
+
+std::string Contact::getLastName(void)
+{
+	return (_lastName);
+}
+
+
+std::string Contact::getNickName(void)
+{
+	return (_nickName);
+}
+
+
+std::string Contact::getPhoneNumber(void)
+{
+	return (_phoneNumber);
+}
+
+
+std::string Contact::getSecret(void)
+{
+	return (_secret);
 }

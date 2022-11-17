@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 15:21:00 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/04/11 17:29:00 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:29:28 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	main(void)
 {
 	PhoneBook repertory;
 
-	repertory.add_contact();
+	repertory.setContact(0);
 	return (0);
 }
