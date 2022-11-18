@@ -6,7 +6,7 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 15:20:57 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/17 22:11:39 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:52:39 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void PhoneBook::setContact(size_t index)
 	_contacts[index].setPhoneNumber(askInfo("phone number"));
 	_contacts[index].setSecret(askInfo("darkest secret"));
 
-	if (_len < 7)
+	if (_len < 8)
 		_len++;
 }
 
