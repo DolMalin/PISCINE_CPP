@@ -1,24 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 15:21:00 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/19 21:00:51 by pdal-mol         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "PhoneBook.hpp"
 #include <string>
 
-std::string	getCommand(void)
+static std::string	getCommand(void)
 {
 	std::string  command;
 	
-	 command = "";
-	while ( command.empty() && !std::cin.eof())
+	command = "";
+	while (command.empty() && !std::cin.eof())
 	{
 		std::cout << std::endl << "=====================================" << std::endl;
 		std::cout << "Enter a command [ADD - SEARCH - EXIT]: ";
@@ -28,16 +16,28 @@ std::string	getCommand(void)
 	return  command;
 }
 
-std::string	truncate(std::string toTruncate)
+static size_t	getUserIndex(size_t n)
 {
-	unsigned	len;
-
-	len = toTruncate.size();
-	if (len < 10)
-		toTruncate.insert(0, 10 - len, ' '); 
-	else if (len > 10)
-		toTruncate = toTruncate.substr(0, 9) + ".";
-	return toTruncate;
+	std::string  command;
+	
+	command = "";
+	while (command.empty() && !std::cin.eof())
+	{
+		std::cout << std::endl << "=====================================" << std::endl;
+		std::cout << "Enter a contact index [";
+		for(size_t i = 0; i < n; i++)
+		{
+			std::cout << i;
+			if (i < n - 1)
+				std::cout << " - ";
+		}
+		std::cout << "]: ";
+		std::getline(std::cin, command);
+		std::cout << "=====================================" << std::endl;
+	}
+	if (command.length() != 1)
+		return 9;
+	return  (int)command.at(0) - '0';
 }
 
 int	main(void)
@@ -45,7 +45,7 @@ int	main(void)
 	PhoneBook	repertory;
 	std::string	command;
 
-	while(!std::cin.eof()) 
+	while(!std::cin.eof())
 	{
 		command = getCommand();
 		if (command == "ADD")
@@ -57,25 +57,11 @@ int	main(void)
 		}
 		else if (command == "SEARCH")
 		{
-			for (size_t i = 0; i < 4; i++)
-			{
-				std::cout << "|";
-				for (size_t j = 0; j < repertory.getLen(); j++)
-				{
-					if (i == 0)
-						std::cout << truncate(repertory.getContact(j).getFirstName()) << "|";
-					else if (i == 1)
-						std::cout << truncate(repertory.getContact(j).getLastName()) << "|";
-					else if ( i == 2)
-						std::cout << truncate(repertory.getContact(j).getNickName()) << "|";
-					else
-						std::cout << "         " << j << "|";
-				}
-				std::cout << std::endl;
-			}
+			repertory.printContacts();
+			repertory.printContact(getUserIndex(repertory.getLen()));
 		}
 		else if (command == "EXIT")
 			break ;
 	}
-	return (0);
+	return EXIT_SUCCESS;
 }

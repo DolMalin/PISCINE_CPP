@@ -17,4 +17,6 @@ class PhoneBook
 		void		setContact(size_t index);
 		Contact		getContact(size_t index);
 		size_t		getLen(void);
+		void		printContacts(void);
+		void		printContact(size_t index);
 };

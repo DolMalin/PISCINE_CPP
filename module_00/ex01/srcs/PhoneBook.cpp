@@ -1,17 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 15:20:57 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/18 11:52:39 by pdal-mol         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <iostream>
 #include "PhoneBook.hpp"
+
+static std::string	truncate(std::string toTruncate)
+{
+	unsigned	len;
+
+	len = toTruncate.size();
+	if (len < 10)
+		toTruncate.insert(0, 10 - len, ' '); 
+	else if (len > 10)
+		toTruncate = toTruncate.substr(0, 9) + ".";
+	return toTruncate;
+}
 
 PhoneBook::PhoneBook(void)
 {
@@ -55,7 +54,43 @@ Contact PhoneBook::getContact(size_t index)
 	return _contacts[index];
 }
 
+
 size_t	PhoneBook::getLen(void)
 {
 	return _len;
+}
+
+
+void	PhoneBook::printContacts(void)
+{
+	for (size_t i = 0; i < 4; i++)
+	{
+		std::cout << "|";
+		for (size_t j = 0; j < getLen(); j++)
+		{
+			if (i == 0)
+				std::cout << truncate(getContact(j).getFirstName()) << "|";
+			else if (i == 1)
+				std::cout << truncate(getContact(j).getLastName()) << "|";
+			else if ( i == 2)
+				std::cout << truncate(getContact(j).getNickName()) << "|";
+			else
+				std::cout << "         " << j << "|";
+		}
+		std::cout << std::endl;
+	}
+}
+
+void	PhoneBook::printContact(size_t index)
+{
+	if (index >= _len)
+	{
+		std::cout << "Invalid index" << std::endl;
+		return;
+	}
+	std::cout << "First Name: " << getContact(index).getFirstName() << std::endl;
+	std::cout << "Last Name: " <<getContact(index).getLastName()  << std::endl;
+	std::cout << "Nick Name: " << getContact(index).getNickName()  << std::endl;
+	std::cout << "Phone Number: " << getContact(index).getPhoneNumber() << std::endl;
+	std::cout << "Darkest Secret: " << getContact(index).getSecret() << std::endl;
 }
