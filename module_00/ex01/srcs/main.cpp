@@ -6,11 +6,27 @@
 /*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 15:21:00 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/18 13:09:11 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:00:51 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <string>
+
+std::string	getCommand(void)
+{
+	std::string  command;
+	
+	 command = "";
+	while ( command.empty() && !std::cin.eof())
+	{
+		std::cout << std::endl << "=====================================" << std::endl;
+		std::cout << "Enter a command [ADD - SEARCH - EXIT]: ";
+		std::getline(std::cin, command);
+		std::cout << "=====================================" << std::endl;
+	}
+	return  command;
+}
 
 std::string	truncate(std::string toTruncate)
 {
@@ -27,40 +43,38 @@ std::string	truncate(std::string toTruncate)
 int	main(void)
 {
 	PhoneBook	repertory;
-	std::string	buffer;
+	std::string	command;
 
-	while(true)
+	while(!std::cin.eof()) 
 	{
-		buffer = "";
-		while (buffer.empty())
-		{
-			std::cout << std::endl << "=====================================" << std::endl;
-			std::cout << "Enter a command [ADD - SEARCH - EXIT]: ";
-			std::getline(std::cin, buffer);
-			std::cout << "=====================================" << std::endl;
-		}
-		if (buffer == "ADD")
+		command = getCommand();
+		if (command == "ADD")
 		{
 			if (repertory.getLen() == 8)
 				repertory.setContact(0);
 			else
 				repertory.setContact(repertory.getLen());
-			continue;
 		}
-		else if (buffer == "SEARCH")
+		else if (command == "SEARCH")
 		{
-			for (size_t i = 0; i < repertory.getLen(); i++)
+			for (size_t i = 0; i < 4; i++)
 			{
-				std::cout << i << std::endl;
-				std::cout << truncate(repertory.getContact(i).getFirstName()) << std::endl;
-				std::cout << truncate(repertory.getContact(i).getLastName()) << std::endl;
-				std::cout << truncate(repertory.getContact(i).getNickName()) << std::endl;
-				std::cout << truncate(repertory.getContact(i).getPhoneNumber()) << std::endl;
-				std::cout << truncate(repertory.getContact(i).getSecret()) << std::endl;
+				std::cout << "|";
+				for (size_t j = 0; j < repertory.getLen(); j++)
+				{
+					if (i == 0)
+						std::cout << truncate(repertory.getContact(j).getFirstName()) << "|";
+					else if (i == 1)
+						std::cout << truncate(repertory.getContact(j).getLastName()) << "|";
+					else if ( i == 2)
+						std::cout << truncate(repertory.getContact(j).getNickName()) << "|";
+					else
+						std::cout << "         " << j << "|";
+				}
 				std::cout << std::endl;
 			}
 		}
-		else if (buffer == "EXIT")
+		else if (command == "EXIT")
 			break ;
 	}
 	return (0);
