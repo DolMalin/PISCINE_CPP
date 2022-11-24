@@ -5,7 +5,6 @@ static std::string	getCommand(void)
 {
 	std::string  command;
 	
-	command = "";
 	while (command.empty() && !std::cin.eof())
 	{
 		std::cout << std::endl << "=====================================" << std::endl;
@@ -20,7 +19,6 @@ static size_t	getUserIndex(size_t n)
 {
 	std::string  command;
 	
-	command = "";
 	while (command.empty() && !std::cin.eof())
 	{
 		std::cout << std::endl << "=====================================" << std::endl;
@@ -37,7 +35,7 @@ static size_t	getUserIndex(size_t n)
 	}
 	if (command.length() != 1)
 		return 9;
-	return  (int)command.at(0) - '0';
+	return  (int)command.at(0) - '0'; 
 }
 
 int	main(void)
@@ -57,11 +55,13 @@ int	main(void)
 		}
 		else if (command == "SEARCH")
 		{
+			if (repertory.getLen() == 0)
+				continue;
 			repertory.printContacts();
 			repertory.printContact(getUserIndex(repertory.getLen()));
 		}
 		else if (command == "EXIT")
 			break ;
 	}
-	return EXIT_SUCCESS;
+	return 0;
 }

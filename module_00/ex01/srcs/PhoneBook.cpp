@@ -27,7 +27,7 @@ std::string	PhoneBook::askInfo(std::string str)
 	std::string buffer;
 
 	buffer = "";
-	while (buffer.empty())
+	while (buffer.empty() && !std::cin.eof())
 	{
 		std::cout << "Enter a " << str << ": ";
 		std::getline(std::cin, buffer);
