@@ -20,11 +20,11 @@ class Contact {
 		void	setPhoneNumber(std::string str);
 		void	setSecret(std::string str);
 
-		std::string	getFirstName(void);
-		std::string	getLastName(void);
-		std::string	getNickName(void);
-		std::string	getPhoneNumber(void);
-		std::string	getSecret(void);
+		std::string	firstName(void);
+		std::string	lastName(void);
+		std::string	nickName(void);
+		std::string	phoneNumber(void);
+		std::string	secret(void);
 		
 };
 

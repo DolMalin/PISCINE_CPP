@@ -1,43 +1,6 @@
 #include "PhoneBook.hpp"
 #include <string>
 
-static std::string	getCommand(void)
-{
-	std::string  command;
-	
-	while (command.empty() && !std::cin.eof())
-	{
-		std::cout << std::endl << "=====================================" << std::endl;
-		std::cout << "Enter a command [ADD - SEARCH - EXIT]: ";
-		std::getline(std::cin, command);
-		std::cout << "=====================================" << std::endl;
-	}
-	return  command;
-}
-
-static size_t	getUserIndex(size_t n)
-{
-	std::string  command;
-	
-	while (command.empty() && !std::cin.eof())
-	{
-		std::cout << std::endl << "=====================================" << std::endl;
-		std::cout << "Enter a contact index [";
-		for(size_t i = 0; i < n; i++)
-		{
-			std::cout << i;
-			if (i < n - 1)
-				std::cout << " - ";
-		}
-		std::cout << "]: ";
-		std::getline(std::cin, command);
-		std::cout << "=====================================" << std::endl;
-	}
-	if (command.length() != 1)
-		return 9;
-	return  (int)command.at(0) - '0'; 
-}
-
 int	main(void)
 {
 	PhoneBook	repertory;
@@ -45,20 +8,20 @@ int	main(void)
 
 	while(!std::cin.eof())
 	{
-		command = getCommand();
+		command = repertory.askCommand();
 		if (command == "ADD")
 		{
-			if (repertory.getLen() == 8)
+			if (repertory.len() == 8)
 				repertory.setContact(0);
 			else
-				repertory.setContact(repertory.getLen());
+				repertory.setContact(repertory.len());
 		}
 		else if (command == "SEARCH")
 		{
-			if (repertory.getLen() == 0)
+			if (repertory.len() == 0)
 				continue;
 			repertory.printContacts();
-			repertory.printContact(getUserIndex(repertory.getLen()));
+			repertory.printContact(repertory.askUserIndex());
 		}
 		else if (command == "EXIT")
 			break ;

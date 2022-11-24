@@ -38,31 +38,31 @@ void Contact::setSecret(std::string str)
 
 /* =================== GET INFOS =================== */
 
-std::string Contact::getFirstName(void)
+std::string Contact::firstName(void)
 {
 	return _firstName;
 }
 
 
-std::string Contact::getLastName(void)
+std::string Contact::lastName(void)
 {
 	return _lastName;
 }
 
 
-std::string Contact::getNickName(void)
+std::string Contact::nickName(void)
 {
 	return _nickName;
 }
 
 
-std::string Contact::getPhoneNumber(void)
+std::string Contact::phoneNumber(void)
 {
 	return _phoneNumber;
 }
 
 
-std::string Contact::getSecret(void)
+std::string Contact::secret(void)
 {
 	return _secret;
 }

@@ -14,9 +14,13 @@ class PhoneBook
 		~PhoneBook(void);
 		
 		std::string	askInfo(std::string str);
+		size_t		askUserIndex();
+		std::string	askCommand();
+
 		void		setContact(size_t index);
-		Contact		getContact(size_t index);
-		size_t		getLen(void);
 		void		printContacts(void);
 		void		printContact(size_t index);
+		
+		Contact		contact(size_t index);
+		size_t		len(void);
 };
