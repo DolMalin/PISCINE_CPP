@@ -2,7 +2,11 @@
 
 int	main(void)
 {
-	Zombie michel = std::string("Marcel");
-	michel.announce();
+	Zombie *michel = newZombie("Michel");
+	michel->announce();
+	delete michel;
+
+	randomChump("Marcel");
+
 	return (0);
 }

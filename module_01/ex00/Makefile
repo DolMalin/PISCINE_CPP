@@ -2,8 +2,8 @@ NAME		= 	a.out
 
 SRCS		= 	main.cpp \
 				Zombie.cpp \
-				# newZombie.cpp \
-				# randomChump.cpp
+				newZombie.cpp \
+				randomChump.cpp
 
 OBJ			=	$(SRCS:.cpp=.o)
 
