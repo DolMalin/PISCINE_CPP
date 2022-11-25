@@ -7,7 +7,7 @@ SRCS		= 	main.cpp \
 
 OBJ			=	$(SRCS:.cpp=.o)
 
-HEADERS		=	srcs/Zombie.hpp
+HEADERS		=	Zombie.hpp
 				
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
@@ -17,7 +17,7 @@ all:		$(NAME)
 %.o:		%.c $(HEADERS) Makefile
 			$(CXX) $(CXXFLAGS) -o $@ -c $<
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) $(HEADERS) Makefile
 			$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
@@ -28,4 +28,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean Makefile re
