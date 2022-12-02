@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 14:47:24 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/11/24 22:00:24 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/11/25 10:51:09 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS		= 	Account.cpp\
 
 OBJ			=	$(SRCS:.cpp=.o)
 
-HEADERS		=	srcs/Account.hpp
+HEADERS		=	Account.hpp
 				
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
@@ -27,7 +27,7 @@ all:		$(NAME)
 %.o:		%.c $(HEADERS) Makefile
 			$(CXX) $(CXXFLAGS) -o $@ -c $<
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) $(HEADERS) Makefile
 			$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
@@ -38,4 +38,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean Makefile re

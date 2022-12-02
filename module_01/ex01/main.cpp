@@ -64,6 +64,5 @@ int	main(void)
 
 	delete [] horde;
 
-
 	return (0);
 }

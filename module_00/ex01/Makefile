@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 14:47:24 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/11/19 22:23:50 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/11/25 10:51:16 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ all:		$(NAME)
 %.o:		%.c $(HEADERS) Makefile
 			$(CXX) $(CXXFLAGS) -o $@ -c $<
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) $(HEADERS) Makefile
 			$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
@@ -40,4 +40,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean Makefile re
