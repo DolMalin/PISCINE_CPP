@@ -2,13 +2,13 @@
 
 ClapTrap::ClapTrap(): _name("Michel"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap " << _name << " has spawned!" << std::endl; 
+	std::cout << "ClapTrap " << _name << " has spawned! (Default constructor)" << std::endl; 
 }
 
 
 ClapTrap::ClapTrap(const std::string &name): _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap " << _name << " has spawned!" << std::endl; 
+	std::cout << "ClapTrap " << _name << " has spawned! (Default constructor with input name)" << std::endl;
 }
 
 ClapTrap::~ClapTrap() {
@@ -17,6 +17,7 @@ ClapTrap::~ClapTrap() {
 
 ClapTrap::ClapTrap(const ClapTrap &src)
 {
+	std::cout << "ClapTrap " << src._name << " has spawned! (Copy constructor)" << std::endl;
 	*this = src;
 }
 
@@ -26,7 +27,8 @@ ClapTrap & ClapTrap::operator = (const ClapTrap &rhs)
 	_hitPoints = rhs._hitPoints;
 	_energyPoints = rhs._energyPoints;
 	_attackDamage = rhs._attackDamage;
-	
+
+	std::cout << "ClapTrap " << rhs._name << " has spawned! (Copy assignment constructor)" << std::endl;
 	return *this;
 }
 
