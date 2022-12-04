@@ -4,6 +4,10 @@
 #include <iostream>
 #include <limits.h>
 
+# define CLAP_COLOR "\x1B[36m"
+# define SCAV_COLOR "\x1B[35m"
+# define END "\033[0m"
+
 class ClapTrap
 {
 	protected:

@@ -24,10 +24,10 @@ int	main(void)
 		std::cout << std::endl;
 		std::cout << "=============================" << std::endl;
 		std::cout << "DESTRUCTORS" << std::endl;
-		std::cout << "=============================" << std::endl << std::endl;
+		std::cout << "=============================" << std::endl;
 	}
 
-	std::cout << "#2" << std::endl;
+	std::cout << std::endl << "#2" << std::endl;
 	{
 		std::cout << "=============================" << std::endl;
 		std::cout << "CONSTRUCTORS" << std::endl;
@@ -53,6 +53,6 @@ int	main(void)
 		std::cout << std::endl;
 		std::cout << "=============================" << std::endl;
 		std::cout << "DESTRUCTORS" << std::endl;
-		std::cout << "=============================" << std::endl << std::endl;
+		std::cout << "=============================" << std::endl;
 	}
 }
