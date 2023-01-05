@@ -24,7 +24,7 @@ int	main(void)
 			repertory.printContact(repertory.askUserIndex());
 		}
 		else if (command == "EXIT")
-			break ;
+			return 0;
 	}
 	return 0;
 }
