@@ -1,29 +1,48 @@
-NAME		= 	a.out
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/06 15:26:28 by pdal-mol          #+#    #+#              #
+#    Updated: 2023/01/06 15:26:29 by pdal-mol         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS		= 	main.cpp \
-				Fixed.cpp
+NAME			= 	fixed
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
-OBJ			=	$(SRCS:.cpp=.o)
+INCLUDES		=	Fixed.hpp
 
-HEADERS		=	Fixed.hpp
-				
-CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+LST_SRCS		= 	main.cpp \
+					Fixed.cpp
+					
+LST_OBJ			=	$(LST_SRCS:.cpp=.o)
+OBJ				=	$(addprefix .objects/,$(LST_OBJ))
+DEP				=	$(OBJ:.o=.d)
 
-all:		$(NAME)
 
-%.o:		%.c $(HEADERS) Makefile
-			$(CXX) $(CXXFLAGS) -o $@ -c $<
+all:			$(NAME)
 
-$(NAME):	$(OBJ) $(HEADERS) Makefile
-			$(CXX) -o $(NAME) $(OBJ)
+.objects/%.o: 	%.cpp $(HEADERS)| .objects
+				$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADERS)
 
-clean:
-			rm -rf $(OBJ)
+.objects:
+	mkdir -p '.objects'
 
-fclean:		clean
-			rm -rf $(NAME)
+$(NAME):		$(OBJ) Makefile
+				$(CXX) -o $(NAME) $(OBJ)
+			
+clean:		
+				rm -rf $(OBJ) $(DEP)
 
-re:			fclean $(NAME)
+fclean:			clean
+				rm -rf $(NAME)
 
-.PHONY:		all clean fclean Makefile re
+re:				fclean $(NAME)
+
+.PHONY:			all clean fclean Makefile re
+
+-include 		$(DEP)
