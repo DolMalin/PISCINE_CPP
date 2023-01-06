@@ -3,39 +3,44 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 14:47:24 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/11/25 10:51:09 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/06 10:45:27 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= 	account_tests
+NAME			= 	account_tests
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
-SRCS		= 	Account.cpp\
-				tests.cpp
+INCLUDES		=	Account.hpp
 
-OBJ			=	$(SRCS:.cpp=.o)
+LST_SRCS		= 	Account.cpp\
+					tests.cpp
+					
+LST_OBJ			=	$(LST_SRCS:.cpp=.o)
+OBJ				=	$(addprefix .objects/,$(LST_OBJ))
+DEP				=	$(OBJ:.o=.d)
 
-HEADERS		=	Account.hpp
-				
-CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-all:		$(NAME)
 
-%.o:		%.c $(HEADERS) Makefile
-			$(CXX) $(CXXFLAGS) -o $@ -c $<
+all:			$(NAME)
 
-$(NAME):	$(OBJ) $(HEADERS) Makefile
-			$(CXX) -o $(NAME) $(OBJ)
+.objects/%.o: 	%.cpp $(HEADERS)| .objects
+				$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADERS)
+
+$(NAME):		$(OBJ) Makefile
+				$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
-			rm -rf $(OBJ)
+				rm -rf $(OBJ) $(DEP)
 
-fclean:		clean
-			rm -rf $(NAME)
+fclean:			clean
+				rm -rf $(NAME)
 
-re:			fclean $(NAME)
+re:				fclean $(NAME)
 
-.PHONY:		all clean fclean Makefile re
+.PHONY:			all clean fclean Makefile re
+
+-include 		$(DEP)

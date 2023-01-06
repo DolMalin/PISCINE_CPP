@@ -6,38 +6,43 @@
 #    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 14:47:24 by pdal-mol          #+#    #+#              #
-#    Updated: 2023/01/05 10:42:45 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/06 10:48:06 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= 	awesome_phonebook
+NAME			= 	account_tests
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
-SRCS		= 	srcs/main.cpp\
-				srcs/Contact.cpp\
-				srcs/PhoneBook.cpp
+INCLUDES		=	Contact.hpp\
+					PhoneBook.hpp
 
-OBJ			=	$(SRCS:.cpp=.o)
+LST_SRCS		= 	main.cpp\
+					Contact.cpp\
+					PhoneBook.cpp
+					
+LST_OBJ			=	$(LST_SRCS:.cpp=.o)
+OBJ				=	$(addprefix .objects/,$(LST_OBJ))
+DEP				=	$(OBJ:.o=.d)
 
-HEADERS		=	srcs/Contact.hpp\
-				srcs/PhoneBook.hpp
-				
-CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-all:		$(NAME)
 
-%.o:		%.c $(HEADERS) Makefile
-			$(CXX) $(CXXFLAGS) -o $@ -c $<
+all:			$(NAME)
 
-$(NAME):	$(OBJ) $(HEADERS) Makefile
-			$(CXX) -o $(NAME) $(OBJ)
+.objects/%.o: 	%.cpp $(HEADERS)| .objects
+				$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADERS)
+
+$(NAME):		$(OBJ) Makefile
+				$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
-			rm -rf $(OBJ)
+				rm -rf $(OBJ) $(DEP)
 
-fclean:		clean
-			rm -rf $(NAME)
+fclean:			clean
+				rm -rf $(NAME)
 
-re:			fclean $(NAME)
+re:				fclean $(NAME)
 
-.PHONY:		all clean fclean Makefile re
+.PHONY:			all clean fclean Makefile re
+
+-include 		$(DEP)
