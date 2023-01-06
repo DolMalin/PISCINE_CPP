@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 12:52:28 by pdal-mol          #+#    #+#              #
-#    Updated: 2022/11/19 22:23:41 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/06 10:49:20 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,10 @@ CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 all:		$(NAME)
 
-%.o:		%.c Makefile
+%.o:		%.cpp 
 			$(CXX) $(CXXFLAGS) -o $@ -c $<
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) Makefile
 			$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
