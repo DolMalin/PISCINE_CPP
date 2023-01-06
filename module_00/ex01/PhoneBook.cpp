@@ -60,25 +60,17 @@ size_t	PhoneBook::len(void)
 	return _len;
 }
 
-
 void	PhoneBook::printContacts(void)
 {
-	for (size_t i = 0; i < 4; i++)
+	for (size_t i = 0; i < _len; i++)
 	{
-		std::cout << "|";
-		for (size_t j = 0; j < this->_len; j++)
-		{
-			if (i == 0)
-				std::cout << truncate(contact(j).firstName()) << "|";
-			else if (i == 1)
-				std::cout << truncate(contact(j).lastName()) << "|";
-			else if ( i == 2)
-				std::cout << truncate(contact(j).nickName()) << "|";
-			else
-				std::cout << "         " << j << "|";
-		}
-		std::cout << std::endl;
+		std::cout << "|" << "         " << i;
+		std::cout << "|" << truncate(contact(i).firstName());
+		std::cout << "|" << truncate(contact(i).lastName());
+		std::cout << "|" << truncate(contact(i).nickName());
+		std::cout << "|" << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 void	PhoneBook::printContact(size_t index)

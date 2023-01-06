@@ -6,11 +6,11 @@
 #    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 14:47:24 by pdal-mol          #+#    #+#              #
-#    Updated: 2023/01/06 10:48:06 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/06 10:58:19 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= 	account_tests
+NAME			= 	phonebook
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
