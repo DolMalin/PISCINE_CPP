@@ -39,19 +39,6 @@ int	main(void)
 
 	delete [] horde;
 
-
-	/* ===================~ 1 ~=================*/
-	std::cout << std::endl << "Let's create 1 Bruno !" << std::endl;
-	N = 1;
-	horde = zombieHorde (N, "Bruno");
-	if (!horde)
-		return 1;
-
-	for(int i  = 0; i < N; i++)
-		horde[i].announce();
-
-	delete [] horde;
-
 	/* ===================~ 0 ~=================*/
 	std::cout << std::endl << "Let's create 0 Jacques !" << std::endl;
 	N = 0;
