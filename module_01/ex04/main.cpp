@@ -9,7 +9,7 @@ static std::string replace(std::string &inputStr, const std::string toReplace, c
 	std::string right;
 	size_t 		n;
 
-	if (inputStr.empty() || toReplace.empty())
+	if (inputStr.empty() || toReplace.empty() || toReplace == toInsert)
 		return inputStr;
 	while( (n = inputStr.find(toReplace)) != std::string::npos)
 	{
