@@ -23,7 +23,7 @@ int main(void)
 		delete i;
 	}
 	{
-		std::cout << "=============================" << std::endl;
+		std::cout << std::endl << "=============================" << std::endl;
 		const WrongAnimal* i = new WrongCat();
 
 		std::cout << i->type() << " " << std::endl;

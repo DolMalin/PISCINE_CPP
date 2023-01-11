@@ -6,7 +6,7 @@
 #    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:08:06 by pdal-mol          #+#    #+#              #
-#    Updated: 2023/01/11 11:09:02 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/11 13:17:26 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,16 @@ INCLUDES		=	Animal.hpp \
 					Dog.hpp \
 					Cat.hpp \
 					WrongAnimal.hpp \
-					WrongCat.hpp
+					WrongCat.hpp \
+					Brain.hpp
 
 LST_SRCS		=	main.cpp \
 					Animal.cpp \
 					WrongAnimal.cpp \
 					Dog.cpp \
 					Cat.cpp \
-					WrongCat.cpp
+					WrongCat.cpp \
+					Brain.cpp
 					
 LST_OBJ			=	$(LST_SRCS:.cpp=.o)
 OBJ				=	$(addprefix .objects/,$(LST_OBJ))
