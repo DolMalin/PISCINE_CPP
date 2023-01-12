@@ -80,7 +80,7 @@ void Bureaucrat::downgrade(void)
 
 void Bureaucrat::displayMessage(std::string message, std::string color)
 {
-    std::cout << color << BOLD << "[Bureaucrat] " << END << message << std::endl;   
+    std::cout << color + BOLD + "[Bureaucrat] " + END + message << std::endl;   
 }
 
 /* ========================================================================== */
