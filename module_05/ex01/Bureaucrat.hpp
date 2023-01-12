@@ -16,7 +16,8 @@ class Bureaucrat
         int                 _grade;
     
     public:
-    /* ============== ~ constructors / destructors ~ ============== */
+
+        /* ============== ~ constructors / destructors ~ ============== */
         Bureaucrat();
         Bureaucrat(std::string name, int grade);
         ~Bureaucrat();

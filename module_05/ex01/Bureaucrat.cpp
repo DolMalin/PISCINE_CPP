@@ -54,7 +54,7 @@ const std::string Bureaucrat::name(void) const
 }
 
 
-int Bureaucrat::grade(void) const
+short Bureaucrat::grade(void) const
 {
     return _grade;
 }
