@@ -6,39 +6,42 @@
 
 # define ERR_COLOR "\x1B[31m"
 # define BUREAUCRAT_COLOR "\x1B[36m"
+# define BOLD "\033[1m"
 # define END "\033[0m"
 
 class Bureaucrat
 {
     private:
         const std::string   _name;
-        short              _grade;
-        Bureaucrat();
+        int                 _grade;
     
     public:
-        Bureaucrat(std::string name, short grade);
+    /* ============== ~ constructors / destructors ~ ============== */
+        Bureaucrat();
+        Bureaucrat(std::string name, int grade);
         ~Bureaucrat();
-        // Bureaucrat(const Bureaucrat &src);
-        // Bureaucrat & operator = (const Bureaucrat &rhs);
+        Bureaucrat(const Bureaucrat &src);
+        Bureaucrat & operator = (const Bureaucrat &rhs);
+
+        /* ============== ~ member functions ~ ============== */
+        const std::string   name(void) const;
+        short               grade(void) const;
+        void                upgrade(void);
+        void                downgrade(void);
+        static void         displayMessage(std::string message, std::string color);
 
 
         /* ============== ~ exceptions ~ ============== */
         class GradeTooHighException: public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Grade is too high");
-                }
+                virtual const char *what() const throw();
         };
 
         class GradeTooLowException: public std::exception
         {
             public:
-                virtual const char *what() const throw()
-                {
-                    return ("Grade is too low");
-                }
+                virtual const char *what() const throw();
         };
 
 
