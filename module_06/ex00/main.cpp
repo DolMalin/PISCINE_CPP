@@ -1,4 +1,5 @@
 #include "Scalar.hpp"
+#include <iomanip>
 
 int main(int ac, char **av)
 {
@@ -11,19 +12,7 @@ int main(int ac, char **av)
 	}
 
 	arg = av[1];
-
-
-
-	std::string types [4] = {
-		"char",
-		"int",
-		"float",
-		"double"
-	};
-
 	Scalar s(arg);
-
-	std::cout << s.typeString() << std::endl;
 
 	try
 	{
@@ -49,13 +38,28 @@ int main(int ac, char **av)
 	try
 	{
 		std::cout << "float: ";
-		std:: cout << s.toFloat() << "f" << std::endl;
+		double tmp;
+		if (modf(s.toFloat(), &tmp) == 0)
+			std::cout << std::setprecision(1) << std::fixed;
+		std::cout << s.toFloat() << "f" << std::endl;
 	}
 	catch(const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
 	
-	// std::cout << 0.0f << std::endl;
+
+	try
+	{
+		std::cout << "double: ";
+		double tmp;
+		if (modf(s.toDouble(), &tmp) == 0)
+			std::cout << std::setprecision(1) << std::fixed;
+		std::cout << s.toDouble() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
 }

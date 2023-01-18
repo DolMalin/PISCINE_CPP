@@ -35,9 +35,7 @@ class Scalar
 		/* ============== ~ member functions ~ ============== */
 		std::string 	litteral(void) const;
 		Type			type(void) const;
-		std::string 	typeString(void) const;
 
-		std::string	toString(void) const;
 		char		toChar(void) const;
 		int 		toInt(void) const;
 		float		toFloat(void) const;

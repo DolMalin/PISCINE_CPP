@@ -104,25 +104,6 @@ Scalar::Type Scalar::type(void) const
 }
 
 
-std::string Scalar::typeString(void) const
-{
-	switch(_type)
-	{
-		case eChar:
-			return "char";
-		case eInt:
-			return "int";
-		case eFloat:
-			return "float";
-		case eDouble:
-			return "double";
-		case eNan:
-			return "NaN";
-		default:
-			return "NULL";
-	}
-}
-
 
 char Scalar::toChar(void) const
 {
@@ -210,7 +191,7 @@ float Scalar::toFloat(void) const
 	switch(_type)
 	{
 		case eChar:
-			return static_cast<int>(tmpLong);
+			return static_cast<float>(tmpLong);
 
 		case eInt:
 			return static_cast<float>(tmpLong);
@@ -220,7 +201,7 @@ float Scalar::toFloat(void) const
 				return std::numeric_limits<float>::infinity();
 			else if (_litteral == "-inff")
 				return -std::numeric_limits<float>::infinity();
-			if (tmpDouble < std::numeric_limits<float>::min() || tmpDouble > std::numeric_limits<float>::max())
+			if ( tmpDouble > std::numeric_limits<float>::max())
 				throw ImpossibleConversionException();
 			return static_cast<float>(tmpDouble);
 
@@ -229,12 +210,52 @@ float Scalar::toFloat(void) const
 				return std::numeric_limits<float>::infinity();
 			else if (_litteral == "-inf")
 				return -std::numeric_limits<float>::infinity();
-			if (tmpDouble < std::numeric_limits<float>::min() || tmpDouble > std::numeric_limits<float>::max())
+			if (tmpDouble > std::numeric_limits<float>::max())
 				throw ImpossibleConversionException();
 			return static_cast<float>(tmpDouble);
 
 		case eNan:
 			throw NotANumberFloatException();
+
+		default:
+			throw ImpossibleConversionException();	
+	}
+}
+
+
+double Scalar::toDouble(void) const
+{
+	long int tmpLong = atol(_litteral.c_str());
+	long double tmpDouble = strtof(_litteral.c_str(), NULL); 
+
+	switch(_type)
+	{
+		case eChar:
+			return static_cast<double>(tmpLong);
+
+		case eInt:
+			return static_cast<double>(tmpLong);
+
+		case eFloat:
+			if (_litteral == "+inff" || _litteral == "inff")
+				return std::numeric_limits<double>::infinity();
+			else if (_litteral == "-inff")
+				return -std::numeric_limits<double>::infinity();
+			if ( tmpDouble > std::numeric_limits<double>::max())
+				throw ImpossibleConversionException();
+			return static_cast<double>(tmpDouble);
+
+		case eDouble:
+			if (_litteral == "+inf" || _litteral == "inf")
+				return std::numeric_limits<double>::infinity();
+			else if (_litteral == "-inf")
+				return -std::numeric_limits<double>::infinity();
+			if (tmpDouble > std::numeric_limits<double>::max())
+				throw ImpossibleConversionException();
+			return static_cast<double>(tmpDouble);
+
+		case eNan:
+			throw NotANumberException();
 
 		default:
 			throw ImpossibleConversionException();	
@@ -261,4 +282,10 @@ const char *Scalar::NonDisplayableException::what() const throw()
 const char *Scalar::NotANumberFloatException::what() const throw()
 {
 	return "nanf";
+}
+
+
+const char *Scalar::NotANumberException::what() const throw()
+{
+	return "nan";
 }
