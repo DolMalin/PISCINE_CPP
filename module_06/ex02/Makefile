@@ -6,19 +6,23 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 10:21:49 by pdal-mol          #+#    #+#              #
-#    Updated: 2023/01/20 12:50:29 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/20 14:44:14 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME			= 	scalar
+NAME			= 	type
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
-INCLUDES		=	Scalar.hpp
+INCLUDES		=	main.hpp \
+					Base.hpp \
+					A.hpp \
+					B.hpp \
+					C.hpp
 
 LST_SRCS		=	main.cpp \
-					Scalar.cpp
+					Base.cpp
 					
 LST_OBJ			=	$(LST_SRCS:.cpp=.o)
 OBJ				=	$(addprefix .objects/,$(LST_OBJ))
