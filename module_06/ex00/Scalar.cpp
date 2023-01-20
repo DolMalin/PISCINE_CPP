@@ -185,6 +185,7 @@ int Scalar::toInt(void) const
 
 float Scalar::toFloat(void) const
 {
+
 	long int tmpLong = atol(_litteral.c_str());
 	long double tmpDouble = strtof(_litteral.c_str(), NULL); 
 
@@ -201,7 +202,7 @@ float Scalar::toFloat(void) const
 				return std::numeric_limits<float>::infinity();
 			else if (_litteral == "-inff")
 				return -std::numeric_limits<float>::infinity();
-			if ( tmpDouble > std::numeric_limits<float>::max())
+			if ( tmpDouble > std::numeric_limits<float>::max() || tmpDouble < -std::numeric_limits<float>::max())
 				throw ImpossibleConversionException();
 			return static_cast<float>(tmpDouble);
 
@@ -210,7 +211,7 @@ float Scalar::toFloat(void) const
 				return std::numeric_limits<float>::infinity();
 			else if (_litteral == "-inf")
 				return -std::numeric_limits<float>::infinity();
-			if (tmpDouble > std::numeric_limits<float>::max())
+			if (tmpDouble > std::numeric_limits<float>::max() || tmpDouble < -std::numeric_limits<float>::max())
 				throw ImpossibleConversionException();
 			return static_cast<float>(tmpDouble);
 
@@ -241,7 +242,7 @@ double Scalar::toDouble(void) const
 				return std::numeric_limits<double>::infinity();
 			else if (_litteral == "-inff")
 				return -std::numeric_limits<double>::infinity();
-			if ( tmpDouble > std::numeric_limits<double>::max())
+			if ( tmpDouble > std::numeric_limits<double>::max() || tmpDouble < -std::numeric_limits<double>::max())
 				throw ImpossibleConversionException();
 			return static_cast<double>(tmpDouble);
 
@@ -250,7 +251,7 @@ double Scalar::toDouble(void) const
 				return std::numeric_limits<double>::infinity();
 			else if (_litteral == "-inf")
 				return -std::numeric_limits<double>::infinity();
-			if (tmpDouble > std::numeric_limits<double>::max())
+			if (tmpDouble > std::numeric_limits<double>::max() || tmpDouble < -std::numeric_limits<double>::max())
 				throw ImpossibleConversionException();
 			return static_cast<double>(tmpDouble);
 
