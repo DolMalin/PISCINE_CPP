@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
+#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:08:06 by pdal-mol          #+#    #+#              #
-#    Updated: 2023/01/11 16:00:52 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/12 16:39:35 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,12 @@ NAME			= 	bureaucrat
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
-INCLUDES		=	Bureaucrat.hpp
+INCLUDES		=	Bureaucrat.hpp \
+					Form.hpp
 
 LST_SRCS		=	main.cpp \
-					Bureaucrat.cpp
+					Bureaucrat.cpp \
+					Form.cpp
 					
 LST_OBJ			=	$(LST_SRCS:.cpp=.o)
 OBJ				=	$(addprefix .objects/,$(LST_OBJ))

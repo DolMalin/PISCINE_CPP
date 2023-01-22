@@ -91,9 +91,12 @@ void Bureaucrat::displayMessage(std::string message, std::string color)
 
 std::ostream &operator << (std::ostream &os, const Bureaucrat &rhs)
 {
-	os << BOLD << BUREAUCRAT_COLOR << "[Bureaucrat]" << END << " name: \'" << rhs.name() << "\' grade: " << rhs.grade();
+	os << BOLD << BUREAUCRAT_COLOR << "[Bureaucrat]" << END 
+    << BOLD << " name: " "\'" << END << rhs.name()
+    << "\', " << BOLD <<"grade: " << END << rhs.grade();
 	return os;
 }
+
 
 /* ========================================================================== */
 /*                                                                            */
