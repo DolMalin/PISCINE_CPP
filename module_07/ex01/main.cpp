@@ -63,4 +63,5 @@ int main(void)
 		::iter<Fixed>(array, 10, print);
 		std::cout << std::endl;
 	}
+
 }
