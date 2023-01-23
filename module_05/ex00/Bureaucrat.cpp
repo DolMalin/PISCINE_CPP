@@ -37,7 +37,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &src): _name(src.name())
 
 Bureaucrat & Bureaucrat::operator = (const Bureaucrat &rhs)
 {
-    displayMessage("copy assignment constructor called (_name is const and can't be overwritten within `=` overload)", BUREAUCRAT_COLOR);
+    displayMessage("copy assignment constructor called (_name is const  and can't be overwritten within `=` overload)", BUREAUCRAT_COLOR);
     _grade = rhs._grade;
     return *this;
 }

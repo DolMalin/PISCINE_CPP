@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 10:21:49 by pdal-mol          #+#    #+#              #
-#    Updated: 2023/01/20 17:04:54 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/23 16:52:28 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME			= 	template
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
-INCLUDES		=	main.hpp\
-					Fixed.hpp
+INCLUDES		=	Fixed.hpp\
+					whatever.hpp
 
 LST_SRCS		=	main.cpp\
 					Fixed.cpp
@@ -28,13 +28,13 @@ DEP				=	$(OBJ:.o=.d)
 
 all:			$(NAME)
 
-.objects/%.o: 	%.cpp $(HEADERS)| .objects
-				$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADERS)
+.objects/%.o: 	%.cpp $(INCLUDES) Makefile | .objects
+				$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .objects:
 	mkdir -p '.objects'
 
-$(NAME):		$(OBJ) Makefile
+$(NAME):		$(OBJ) 
 				$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
@@ -45,6 +45,6 @@ fclean:			clean
 
 re:				fclean $(NAME)
 
-.PHONY:			all clean fclean Makefile re
+.PHONY:			all clean fclean re
 
 -include 		$(DEP)

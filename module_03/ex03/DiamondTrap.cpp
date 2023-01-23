@@ -3,21 +3,20 @@
 DiamondTrap::DiamondTrap(): ClapTrap(), ScavTrap(), FragTrap()
 {
 	std::cout << DIAMOND_COLOR << "DiamondTrap " << _name << " arrives majestically! (Default constructor)" << END << std::endl; 
-	_name = ClapTrap::_name;
-	FragTrap::_hitPoints = 100;
-	ScavTrap::_energyPoints = 50;
-	FragTrap::_attackDamage = 30;
+	this->_name = ClapTrap::_name;
+	_hitPoints = 100;
+	_energyPoints = 50;
+	_attackDamage = 30;
 
 }
-
 
 DiamondTrap::DiamondTrap(const std::string &name): ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
 {
 	std::cout << DIAMOND_COLOR << "DiamondTrap " << name << " arrives majestically! (Default constructor with input name)" << END << std::endl; 
-	_name = name;
-	FragTrap::_hitPoints = 100;
-	ScavTrap::_energyPoints = 50;
-	FragTrap::_attackDamage = 30;
+	this->_name = name;
+	_hitPoints = 100;
+	_energyPoints = 50;
+	_attackDamage = 30;
 }
 
 
@@ -67,23 +66,23 @@ std::string DiamondTrap::name()
 
 std::string DiamondTrap::clapName()
 {
-	return ClapTrap::_name;
+	return _name;
 }
 
 unsigned int DiamondTrap::hitPoints()
 {
-	return FragTrap::_hitPoints;
+	return _hitPoints;
 }
 
 
 unsigned int DiamondTrap::attackDamage()
 {
-	return FragTrap::_attackDamage;
+	return _attackDamage;
 }
 
 
 
 unsigned int DiamondTrap::energyPoints()
 {
-	return ScavTrap::_energyPoints;
+	return _energyPoints;
 }

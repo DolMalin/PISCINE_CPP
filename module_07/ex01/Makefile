@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 10:21:49 by pdal-mol          #+#    #+#              #
-#    Updated: 2023/01/21 11:11:48 by pdal-mol         ###   ########.fr        #
+#    Updated: 2023/01/23 16:54:12 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,13 @@ DEP				=	$(OBJ:.o=.d)
 
 all:			$(NAME)
 
-.objects/%.o: 	%.cpp $(HEADERS)| .objects
-				$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADERS)
+.objects/%.o: 	%.cpp $(INCLUDES) Makefile | .objects
+				$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .objects:
 	mkdir -p '.objects'
 
-$(NAME):		$(OBJ) Makefile
+$(NAME):		$(OBJ)
 				$(CXX) -o $(NAME) $(OBJ)
 			
 clean:		
@@ -45,6 +45,6 @@ fclean:			clean
 
 re:				fclean $(NAME)
 
-.PHONY:			all clean fclean Makefile re
+.PHONY:			all clean fclean re
 
 -include 		$(DEP)

@@ -1,35 +1,54 @@
-NAME		= 	a.out
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/09 13:50:09 by pdal-mol          #+#    #+#              #
+#    Updated: 2023/01/09 13:50:24 by pdal-mol         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS		= 	main.cpp \
-				ClapTrap.cpp \
-				ScavTrap.cpp \
-				FragTrap.cpp \
-				DiamondTrap.cpp
+NAME			= 	diamondtrap
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98 -MD
 
-OBJ			=	$(SRCS:.cpp=.o)
+INCLUDES		=	ClapTrap.hpp \
+					ScavTrap.hpp \
+					FragTrap.hpp \
+					DiamondTrap.hpp
 
-HEADERS		=	ClapTrap.hpp \
-				ScavTrap.hpp \
-				FragTrap.hpp \
-				DiamondTrap.hpp
+LST_SRCS		=	main.cpp \
+					ClapTrap.cpp \
+					ScavTrap.cpp \
+					FragTrap.cpp \
+					DiamondTrap.cpp
+					
+LST_OBJ			=	$(LST_SRCS:.cpp=.o)
+OBJ				=	$(addprefix .objects/,$(LST_OBJ))
+DEP				=	$(OBJ:.o=.d)
+
+
+all:			$(NAME)
+
+.objects/%.o: 	%.cpp $(HEADERS)| .objects
+				$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADERS)
+
+.objects:
+	mkdir -p '.objects'
+
+$(NAME):		$(OBJ) Makefile
+				$(CXX) -o $(NAME) $(OBJ)
 			
-CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+clean:		
+				rm -rf $(OBJ) $(DEP)
 
-all:		$(NAME)
+fclean:			clean
+				rm -rf $(NAME)
 
-%.o:		%.c $(HEADERS) Makefile
-			$(CXX) $(CXXFLAGS) -o $@ -c $<
+re:				fclean $(NAME)
 
-$(NAME):	$(OBJ) $(HEADERS) Makefile
-			$(CXX) -o $(NAME) $(OBJ)
+.PHONY:			all clean fclean Makefile re
 
-clean:
-			rm -rf $(OBJ)
-
-fclean:		clean
-			rm -rf $(NAME)
-
-re:			fclean $(NAME)
-
-.PHONY:		all clean fclean Makefile re
+-include 		$(DEP)
