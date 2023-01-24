@@ -2,6 +2,7 @@
 
 #include <stack>
 #include <iostream>
+#include <list>
 
 template<typename T>
 class MutantStack : public std::stack<T>
