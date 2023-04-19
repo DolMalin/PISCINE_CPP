@@ -37,6 +37,12 @@ class BitcoinExchange
 				virtual const char *what() const throw();
 		};
 
+		class BadDatabaseException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+
 		class InvalidDateException: public std::exception
 		{
 			public:

@@ -12,18 +12,26 @@ BitcoinExchange::BitcoinExchange(const std::string &file_path)
 
 	while(std::getline(database, line))
 	{
+		std::string date;
+		std::string value;
+
 		pos = line.find(",");
 		if (pos == std::string::npos)
-			throw BadInputException();
+			throw BadDatabaseException();
+
+		date = trim(line.substr(0, pos));
+		value = trim(line.substr(pos+1));
 		
-		if (!isDate(trim(line.substr(0, pos))))
+		if (!isDate(date))
 			throw InvalidDateException();
 		
-		if (!isNumber(trim(line.substr(pos+1))))
+		if (!isNumber(value))
 			throw InvalidValueException();
 		
-		_map[trim(line.substr(0, pos))] = std::atof(line.substr(pos + 1).c_str());
+		_map[date] = std::atof(value.c_str());
 	}
+	if (_map.empty())
+		throw BadDatabaseException();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src)
@@ -47,6 +55,9 @@ bool BitcoinExchange::isDate(const std::string &str)
 	long	l_buffer = 0;
 	size_t	dash1_p = 0;
 	size_t	dash2_p = 0;
+
+	if (str.empty())
+		return false;
 
 	for (std::string::const_iterator it = str.begin(); it != str.end(); it++)
 		if (*it == '-') dashes_count++;
@@ -80,6 +91,9 @@ bool BitcoinExchange::isDate(const std::string &str)
 bool BitcoinExchange::isNumber(const std::string &str)
 {
 	char 	*p_buffer = NULL;
+
+	if (str.empty())
+		return false;
 
 	if (str.find(".") != std::string::npos)
 	{
@@ -146,6 +160,11 @@ float BitcoinExchange::convert(const std::string &date, const std::string &value
 const char *BitcoinExchange::BadInputException::what() const throw()
 {
 	return "bad input";
+}
+
+const char *BitcoinExchange::BadDatabaseException::what() const throw()
+{
+	return "bad database";
 }
 
 const char *BitcoinExchange::InvalidDateException::what() const throw()
