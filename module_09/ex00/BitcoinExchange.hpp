@@ -29,6 +29,7 @@ class BitcoinExchange
 		bool isLowerThan(const std::string &str, int threshold);
 
 		std::string trim(const std::string &str);
+		float 		convert(const std::string &date, const std::string &value);
 
 		class BadInputException: public std::exception
 		{

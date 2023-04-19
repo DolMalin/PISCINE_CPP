@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 		{
 			std::string date;
 			std::string value;
+			std::string err_buffer = "empty";
 
 			try {
 				pos = line.find("|");
@@ -33,9 +34,11 @@ int	main(int ac, char **av)
 				date = btc.trim(line.substr(0, pos));
 				value = btc.trim(line.substr(pos+1));
 
+				err_buffer = date;
 				if (!btc.isDate(date))
 					throw BitcoinExchange::InvalidDateException();
 				
+				err_buffer = value;
 				if (!btc.isNumber(value))
 					throw BitcoinExchange::InvalidValueException();
 
@@ -44,13 +47,13 @@ int	main(int ac, char **av)
 
 				if (!btc.isLowerThan(value, 1000))
 					throw BitcoinExchange::TooLargeNumberException();
-					
 
 				std::cout << date << " => " << value
-				<< " = " << std::endl;
+				<< " = " << btc.convert(date, value) << std::endl;
+				
 			} catch(const std::exception &e)
 			{
-				std::cerr << "Error: " << e.what() << std::endl;
+				std::cerr << "Error: " << e.what() << " (" << err_buffer << ")" << std::endl;
 			}
 			
 		}

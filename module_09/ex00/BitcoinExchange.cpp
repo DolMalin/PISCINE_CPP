@@ -119,6 +119,7 @@ bool BitcoinExchange::isLowerThan(const std::string &str, int threshold)
 	return true;
 }
 
+
 std::string BitcoinExchange::trim(const std::string &str)
 {
     std::string::const_iterator it = str.begin();
@@ -131,6 +132,16 @@ std::string BitcoinExchange::trim(const std::string &str)
 
     return std::string(it, rit.base());
 }
+
+
+float BitcoinExchange::convert(const std::string &date, const std::string &value)
+{
+	if (_map.find(date) == _map.end())
+		return _map.lower_bound(date)->second * std::strtof(value.c_str(), NULL);
+	else
+		return _map[date] * std::strtof(value.c_str(), NULL);
+}
+
 
 const char *BitcoinExchange::BadInputException::what() const throw()
 {
