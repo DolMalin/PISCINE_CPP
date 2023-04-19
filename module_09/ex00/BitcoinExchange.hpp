@@ -9,28 +9,52 @@
 # include <limits>
 
 # define DATABASE_FILE "data.csv"
+# define WHITESPACE " \n\r\t\f\v"
 
 class BitcoinExchange
 {
 
 	private:
-		std::map<std::string, double>_map;
+		std::map<std::string, double>	_map;
+		BitcoinExchange();
 
 	public:
-		BitcoinExchange();
+		BitcoinExchange(const std::string &file_path);
 		BitcoinExchange(const BitcoinExchange & src);
 		BitcoinExchange & operator = (const BitcoinExchange & rhs);
 		~BitcoinExchange();
 
-		bool isValidDate(std::string str);
+		bool isDate(const std::string &str);
+		bool isNumber(const std::string &str);
+		bool isLowerThan(const std::string &str, int threshold);
 
-		class DatabaseErrorException: public std::exception
+		std::string trim(const std::string &str);
+
+		class BadInputException: public std::exception
 		{
 			public:
 				virtual const char *what() const throw();
 		};
 
-		class DateStringErrorException: public std::exception
+		class InvalidDateException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+
+		class InvalidValueException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+
+		class NotAPositiveNumberException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+
+		class TooLargeNumberException: public std::exception
 		{
 			public:
 				virtual const char *what() const throw();
