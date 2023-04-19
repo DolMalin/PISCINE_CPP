@@ -23,18 +23,18 @@ int	main(int ac, char **av)
 		{
 			std::string date;
 			std::string value;
-			std::string err_buffer = "empty";
+			std::string err_buffer;
 
 			try {
 				pos = line.find("|");
 				date = btc.trim(line.substr(0, pos));
 				value = btc.trim(line.substr(pos+1));
 
-				err_buffer = date;
+				err_buffer = date.empty() ? "empty value" : date;
 				if (!btc.isDate(date))
 					throw BitcoinExchange::InvalidDateException();
 				
-				err_buffer = value;
+				err_buffer = value.empty() ? "empty value" : value;
 				if (!btc.isNumber(value))
 					throw BitcoinExchange::InvalidValueException();
 				else if (btc.isLowerThan(value, 0))
