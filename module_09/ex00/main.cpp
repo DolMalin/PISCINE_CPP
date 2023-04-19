@@ -2,7 +2,6 @@
 
 int	main(int ac, char **av)
 {
-	(void)av;
 	if (ac != 2)
 	{
 		std::cout << "Error: invalid number of arguments" << std::endl;
@@ -28,9 +27,6 @@ int	main(int ac, char **av)
 
 			try {
 				pos = line.find("|");
-				if (pos == std::string::npos)
-					throw BitcoinExchange::BadInputException();
-
 				date = btc.trim(line.substr(0, pos));
 				value = btc.trim(line.substr(pos+1));
 
@@ -41,17 +37,16 @@ int	main(int ac, char **av)
 				err_buffer = value;
 				if (!btc.isNumber(value))
 					throw BitcoinExchange::InvalidValueException();
-
-				if (btc.isLowerThan(value, 0))
+				else if (btc.isLowerThan(value, 0))
 					throw BitcoinExchange::NotAPositiveNumberException();
-
-				if (!btc.isLowerThan(value, 1000))
+				else if (!btc.isLowerThan(value, 1000))
 					throw BitcoinExchange::TooLargeNumberException();
 
 				std::cout << date << " => " << value
 				<< " = " << btc.convert(date, value) << std::endl;
 				
-			} catch(const std::exception &e)
+			}
+			catch(const std::exception &e)
 			{
 				std::cerr << "Error: " << e.what() << " (" << err_buffer << ")" << std::endl;
 			}
