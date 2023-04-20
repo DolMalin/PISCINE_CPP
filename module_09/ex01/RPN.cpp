@@ -40,6 +40,9 @@ void RPN::processExpression()
 	int operand_1;
 	int operand_2;
 
+	if (_expression.empty())
+		throw ErrorException();
+
 	for (std::string::const_iterator it = _expression.begin(); it != _expression.end(); it++)
 	{
 		if (isOperand(*it))
@@ -77,6 +80,8 @@ void RPN::processExpression()
 		else if (!isspace(*it))
 			throw ErrorException();
 	}
+	if (_stack.size() != 1)
+		throw ErrorException();
 	std::cout << _stack.top() << std::endl;
 }
 
