@@ -63,6 +63,7 @@ void PmergeMe::insertionSort(std::vector<int> &array)
 			j--;
 		}
 		array[j + 1] = tmp;
+		// troisieme commentaire
 	}
 }
 
