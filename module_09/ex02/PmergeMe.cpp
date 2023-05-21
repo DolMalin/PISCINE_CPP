@@ -3,7 +3,6 @@
 PmergeMe::PmergeMe(char **av)
 {
 	setup(av);
-	// coucou
 }
 
 PmergeMe::~PmergeMe() {} 
@@ -12,7 +11,6 @@ PmergeMe::PmergeMe(const PmergeMe & src)
 {
 	_vector = src._vector;
 	_deque = src._deque;
-	// bonjour
 }
 
 PmergeMe PmergeMe::operator = (const PmergeMe & rhs)
@@ -63,7 +61,6 @@ void PmergeMe::insertionSort(std::vector<int> &array)
 			j--;
 		}
 		array[j + 1] = tmp;
-		// troisieme commentaire
 	}
 }
 
