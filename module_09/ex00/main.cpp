@@ -27,13 +27,22 @@ int	main(int ac, char **av)
 
 			try {
 				pos = line.find("|");
+
+				err_buffer = "no separator `|`";
+				if (pos == std::string::npos)
+					throw BitcoinExchange::BadInputException();
+
 				date = btc.trim(line.substr(0, pos));
 				value = btc.trim(line.substr(pos+1));
 
+				// check date
 				err_buffer = date.empty() ? "empty value" : date;
 				if (!btc.isDate(date))
 					throw BitcoinExchange::InvalidDateException();
-				
+				else if (btc.lowestDate().compare(date) > 0)
+					throw BitcoinExchange::InvalidDateException();
+	
+				// check value
 				err_buffer = value.empty() ? "empty value" : value;
 				if (!btc.isNumber(value))
 					throw BitcoinExchange::InvalidValueException();

@@ -134,6 +134,12 @@ bool BitcoinExchange::isLowerThan(const std::string &str, int threshold)
 }
 
 
+const std::string BitcoinExchange::lowestDate()
+{
+	return _map.begin()->first;
+}
+
+
 std::string BitcoinExchange::trim(const std::string &str)
 {
     std::string::const_iterator it = str.begin();

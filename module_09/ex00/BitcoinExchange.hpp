@@ -15,7 +15,7 @@ class BitcoinExchange
 {
 
 	private:
-		std::map<std::string, double>	_map;
+		std::map<std::string, double> _map;
 		BitcoinExchange();
 
 	public:
@@ -27,6 +27,8 @@ class BitcoinExchange
 		bool isDate(const std::string &str);
 		bool isNumber(const std::string &str);
 		bool isLowerThan(const std::string &str, int threshold);
+		
+		const std::string lowestDate();
 
 		std::string trim(const std::string &str);
 		float 		convert(const std::string &date, const std::string &value);
