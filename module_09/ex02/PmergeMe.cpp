@@ -3,7 +3,6 @@
 PmergeMe::PmergeMe(char **av)
 {
 	setup(av);
-	// encore un commentaire
 }
 
 PmergeMe::~PmergeMe() {} 
