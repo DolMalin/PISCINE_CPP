@@ -55,7 +55,7 @@ void PmergeMe::insertionSort(std::vector<int> &array)
 	{
 		int tmp = array[i];
 		int j = i - 1;
-	while (array[j] > tmp && j >= 0)
+	while (j >= 0 && array[j] > tmp)
 		{
 			array[j + 1] = array[j];
 			j--;
@@ -85,7 +85,7 @@ void PmergeMe::insertionSort(std::deque<int> &array)
 	{
 		int tmp = array[i];
 		int j = i - 1;
-	while (array[j] > tmp && j >= 0)
+	while (j >= 0 && array[j] > tmp)
 		{
 			array[j + 1] = array[j];
 			j--;
