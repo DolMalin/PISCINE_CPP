@@ -25,8 +25,8 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		bool isDate(const std::string &str);
-		bool isNumber(const std::string &str);
-		bool isLowerThan(const std::string &str, int threshold);
+		bool isNumber(std::string str);
+		bool isLowerThan(std::string str, int threshold);
 		
 		const std::string lowestDate();
 

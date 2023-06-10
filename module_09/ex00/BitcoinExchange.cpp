@@ -88,15 +88,17 @@ bool BitcoinExchange::isDate(const std::string &str)
 	return true;
 }
 
-bool BitcoinExchange::isNumber(const std::string &str)
+bool BitcoinExchange::isNumber(std::string str)
 {
 	char 	*p_buffer = NULL;
 
 	if (str.empty())
 		return false;
 
-	if (str.find(".") != std::string::npos)
+	if (str.find(".") != std::string::npos || *str.rbegin() == 'f')
 	{
+		if (*str.rbegin() == 'f')
+			str = str.substr(0, str.size() -1);
 		std::strtof(str.c_str(), &p_buffer);
 		if (*p_buffer)
 			return false;
@@ -112,14 +114,17 @@ bool BitcoinExchange::isNumber(const std::string &str)
 }
 
 
-bool BitcoinExchange::isLowerThan(const std::string &str, int threshold)
+bool BitcoinExchange::isLowerThan(std::string str, int threshold)
 {
 	char 	*p_buffer = NULL;
 	long	l_buffer = 0;
 	double	d_buffer = 0;
 
-	if (str.find(".") != std::string::npos)
+	if (str.find(".") != std::string::npos || *str.rbegin() == 'f')
 	{
+		if (*str.rbegin() == 'f')
+			str = str.substr(0, str.size() -1);
+
 		d_buffer = std::strtof(str.c_str(), &p_buffer);
 		if (*p_buffer || d_buffer > double(threshold))
 			return false;
