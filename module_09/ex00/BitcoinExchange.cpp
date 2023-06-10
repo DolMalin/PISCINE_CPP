@@ -67,8 +67,9 @@ bool BitcoinExchange::isDate(const std::string &str)
 	// Parse year
 	dash1_p = str.find('-');
 	l_buffer = std::strtol(str.substr(0, dash1_p).c_str(), &p_buffer, 10);
-	if (*p_buffer)
+	if (*p_buffer || l_buffer > 9999)
 		return false;
+
 
 	// Parse month
 	dash1_p++;

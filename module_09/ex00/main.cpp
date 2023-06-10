@@ -11,14 +11,18 @@ int	main(int ac, char **av)
 	try
 	{
 		BitcoinExchange btc = BitcoinExchange(DATABASE_FILE);
-
+	
 		std::ifstream input_file(av[1]);
 		if (!input_file.is_open())
 			throw BitcoinExchange::BadInputException();
 
 		std::string	line;
 		size_t 		pos = 0;
+
 		std::getline(input_file, line);
+		if (line != "date | value")
+			throw BitcoinExchange::BadInputException();
+
 		while(std::getline(input_file, line))
 		{
 			std::string date;
