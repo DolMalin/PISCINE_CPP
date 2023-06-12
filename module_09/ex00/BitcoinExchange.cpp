@@ -8,7 +8,10 @@ BitcoinExchange::BitcoinExchange(const std::string &file_path)
 
 	std::string	line;
 	size_t 		pos = 0;
+
 	std::getline(database, line);
+	if (line != "date,exchange_rate")
+		throw BitcoinExchange::BadDatabaseException();
 
 	while(std::getline(database, line))
 	{
@@ -59,6 +62,7 @@ bool BitcoinExchange::isDate(const std::string &str)
 	if (str.empty())
 		return false;
 
+	// Parse format
 	for (std::string::const_iterator it = str.begin(); it != str.end(); it++)
 		if (*it == '-') dashes_count++;
 	if (dashes_count != 2)
@@ -69,7 +73,6 @@ bool BitcoinExchange::isDate(const std::string &str)
 	l_buffer = std::strtol(str.substr(0, dash1_p).c_str(), &p_buffer, 10);
 	if (*p_buffer || l_buffer > 9999)
 		return false;
-
 
 	// Parse month
 	dash1_p++;
