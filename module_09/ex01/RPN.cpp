@@ -37,14 +37,15 @@ int RPN::toInt(const char c)
 
 void RPN::processExpression()
 {
-	int operand_1;
-	int operand_2;
+	int a;
+	int b;
 
 	if (_expression.empty())
 		throw ErrorException();
 
 	for (std::string::const_iterator it = _expression.begin(); it != _expression.end(); it++)
 	{
+
 		if (isOperand(*it))
 			_stack.push(toInt(*it));
 		else if (isOperator(*it))
@@ -52,30 +53,29 @@ void RPN::processExpression()
 			if (_stack.size() < 2)
 				throw ErrorException();
 
-			operand_1 = _stack.top();
+			a = _stack.top();
 			_stack.pop();
-			operand_2 = _stack.top();
+			b = _stack.top();
 			_stack.pop();
 
 			switch(*it)
 			{
 				case '+':
-					operand_1 = operand_1 + operand_2;
+					_stack.push(b + a);
 					break;
 				case '-':
-					operand_1 = operand_2 - operand_1;
+					_stack.push(b - a);
 					break;
 				case '*':
-					operand_1 = operand_1 * operand_2;
+					_stack.push(b * a);
 					break;
 				case '/':
-					if (operand_1 == 0)
+					if (a == 0)
 						throw ErrorException();
-					operand_1 =  operand_2 / operand_1;
+					_stack.push(b / a);
 					break;
 			}
 
-			_stack.push(operand_1);
 		}
 		else if (!isspace(*it))
 			throw ErrorException();

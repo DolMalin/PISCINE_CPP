@@ -108,6 +108,7 @@ void PmergeMe::mergeInsertionSort(std::vector<int> &array)
 		insertionSort(array);
 }
 
+
 void PmergeMe::insertionSort(std::deque<int> &array)
 {
 	for (size_t i = 1; i < array.size(); i++)
@@ -122,6 +123,7 @@ void PmergeMe::insertionSort(std::deque<int> &array)
 		array[j + 1] = tmp;
 	}
 }
+
 
 void PmergeMe::mergeInsertionSort(std::deque<int> &array)
 {
