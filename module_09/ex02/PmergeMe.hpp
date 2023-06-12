@@ -16,8 +16,10 @@ class PmergeMe
 	private:
 		std::vector<int>	_vector;
 		std::deque<int>		_deque;
-		double				_vector_time;
-		double				_deque_time;
+		double 				_vector_start_t;
+		double				_vector_total_t;
+		double				_deque_start_t;
+		double				_deque_total_t;
 
 		PmergeMe();
 		
@@ -28,13 +30,13 @@ class PmergeMe
 		PmergeMe operator = (const PmergeMe & rhs);
 
 
-		void 				setup(char **av);
+		void 				setup_vector(char **av);
+		void 				setup_deque(char **av);
 		bool 				isDigit(const std::string &str);
 		void				insertionSort(std::vector<int> &array);
 		void				insertionSort(std::deque<int> &array);
 		void				mergeInsertionSort(std::vector<int> &rray);
 		void				mergeInsertionSort(std::deque<int> &rray);
-		void				sort();
 
 		void				displayVector();
 		void				displayDeque();

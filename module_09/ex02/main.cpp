@@ -15,8 +15,6 @@ int main(int ac, char **av)
 		PmergeMe.displayVector();
 		std::cout << std::endl;
 
-		PmergeMe.sort();
-
 		std::cout << "after: ";
 		PmergeMe.displayVector();
 		std::cout << std::endl;

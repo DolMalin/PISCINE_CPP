@@ -2,7 +2,15 @@
 
 PmergeMe::PmergeMe(char **av)
 {
-	setup(av);
+	setup_vector(av);
+	mergeInsertionSort(_vector);
+	clock_t end = clock();
+	_vector_total_t = static_cast<double>(end - _vector_start_t) / (CLOCKS_PER_SEC / 1000);
+
+	setup_deque(av);
+	mergeInsertionSort(_deque);
+	end = clock();
+	_deque_total_t = static_cast<double>(end - _deque_start_t) / (CLOCKS_PER_SEC / 1000);
 }
 
 PmergeMe::~PmergeMe() {} 
@@ -31,9 +39,12 @@ bool PmergeMe::isDigit(const std::string &str)
 	return true;
 }
 
-void PmergeMe::setup(char **av)
+
+void PmergeMe::setup_vector(char **av)
 {
 	long buffer;
+
+	_vector_start_t = clock();
 	for (int i = 0; av[i]; i++)
 	{
 		if (!isDigit(av[i]))
@@ -44,10 +55,28 @@ void PmergeMe::setup(char **av)
 			throw NonPositiveIntException();
 
 		_vector.push_back(buffer);
-		_deque.push_back(buffer);
-
  	}
 }
+
+
+void PmergeMe::setup_deque(char **av)
+{
+	long buffer;
+
+	_deque_start_t = clock();
+	for (int i = 0; av[i]; i++)
+	{
+		if (!isDigit(av[i]))
+			throw InvalidCharacterException();
+
+		buffer = atol(av[i]);
+		if (buffer < 0 || buffer > std::numeric_limits<int>::max())
+			throw NonPositiveIntException();
+
+		_deque.push_back(buffer);
+ 	}
+}
+
 
 void PmergeMe::insertionSort(std::vector<int> &array)
 {
@@ -64,6 +93,7 @@ void PmergeMe::insertionSort(std::vector<int> &array)
 	}
 }
 
+
 void PmergeMe::mergeInsertionSort(std::vector<int> &array)
 {
 	if (array.size() > MERGE_THRESHOLD)
@@ -77,7 +107,6 @@ void PmergeMe::mergeInsertionSort(std::vector<int> &array)
 	else
 		insertionSort(array);
 }
-
 
 void PmergeMe::insertionSort(std::deque<int> &array)
 {
@@ -108,18 +137,6 @@ void PmergeMe::mergeInsertionSort(std::deque<int> &array)
 		insertionSort(array);
 }
 
-void PmergeMe::sort()
-{
-	clock_t start = clock();
-	mergeInsertionSort(_vector);
-	clock_t end = clock();
-	_vector_time = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000);
-
-	start = clock();
-	mergeInsertionSort(_deque);
-	end = clock();
-	_deque_time = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000);
-}
 
 void PmergeMe::displayVector()
 {
@@ -135,12 +152,12 @@ void PmergeMe::displayDeque()
 
 double PmergeMe::vectorTime()
 {
-	return _vector_time;
+	return _vector_total_t;
 }
 
 double PmergeMe::dequeTime()
 {
-	return _deque_time;
+	return _deque_total_t;
 }
 
 const char *PmergeMe::InvalidCharacterException::what() const throw()
